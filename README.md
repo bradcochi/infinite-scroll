@@ -1,3 +1,7 @@
+# Project details
+
+This project was created to learn and practice creating an image viewer with infinite scrolling, similar to Pinterest.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
