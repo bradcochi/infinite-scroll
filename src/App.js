@@ -15,17 +15,17 @@ function App() {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setPhotoArray([...photoArray, ...data]);
+      setPhotoArray((prevPhotoArray) => [...prevPhotoArray, ...data]);
     } catch (error) {
       console.error(error);
     }
   };
 
-  console.log(photoArray);
+  console.log({ photoArray });
 
   const imageLoaded = () => {
-    setImagesLoaded(imagesLoaded + 1);
-    if (imageLoaded === totalImages) {
+    setImagesLoaded((prevImagesLoaded) => prevImagesLoaded + 1);
+    if (imagesLoaded === totalImages) {
       setReady(true);
       setCount(5);
     }
@@ -33,11 +33,15 @@ function App() {
 
   useEffect(() => {
     getPhotos();
-    console.log(photoArray);
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
+      console.log("Hit");
+      console.log("window.scrollY", window.scrollY);
+      console.log("window.innerHeight", window.innerHeight);
+      console.log("document.body.offsetHeight", document.body.offsetHeight);
+      console.log("ready", ready);
       if (
         window.scrollY + window.innerHeight >=
           document.body.offsetHeight - 1000 &&
@@ -62,9 +66,11 @@ function App() {
 
   return (
     <div>
-      <h1>Infinity Scroll - Unsplash API</h1>
-      <div>Loading...</div>
-      <div>
+      <h1 className="heading">Infinity Scroll - Unsplash API</h1>
+      <div className="loader" style={{ display: ready ? "none" : "block" }}>
+        Loading...
+      </div>
+      <div className="image-container">
         {photoArray.map((data, index) => (
           <a
             key={index}
