@@ -56,9 +56,31 @@ function App() {
     };
   }, [ready]);
 
+  useEffect(() => {
+    setTotalImages(photoArray.length);
+  }, [photoArray]);
+
   return (
     <div>
-      <p>Hello World</p>
+      <h1>Infinity Scroll - Unsplash API</h1>
+      <div>Loading...</div>
+      <div>
+        {photoArray.map((data, index) => (
+          <a
+            key={index}
+            href={data.links.html}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={data.urls.regular}
+              alt={data.alt_description || "Unknown"}
+              title={data.alt_description || "Unknown"}
+              onLoad={imageLoaded}
+            />
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
