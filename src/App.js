@@ -43,11 +43,18 @@ function App() {
           document.body.offsetHeight - 1000 &&
         ready
       ) {
-        getPhotos(0);
+        getPhotos();
         setReady(false);
       }
     };
-  });
+
+    window.addEventListener("scroll", handleScroll);
+
+    // clean up by removing the event listener when the component mounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [ready]);
 
   return (
     <div>
