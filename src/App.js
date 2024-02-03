@@ -50,7 +50,7 @@ function App() {
 
     window.addEventListener("scroll", handleScroll);
 
-    // clean up by removing the event listener when the component mounts
+    // clean up by removing the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
